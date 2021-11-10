@@ -1,0 +1,21 @@
+server:
+  port: 20002
+# 在返回给页面的结果里，把错误信息添加到message里
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: coupon-calculation-serv
+
+logging:
+  level:
+    com.broadview.coupon: debug
+
+# 开启所有management端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
