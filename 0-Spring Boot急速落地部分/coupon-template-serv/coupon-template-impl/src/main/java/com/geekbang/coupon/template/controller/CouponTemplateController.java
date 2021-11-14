@@ -25,7 +25,7 @@ public class CouponTemplateController {
      *
      * localhost:20000/template/add
      */
-    @PostMapping("/add")
+    @PostMapping("/addTemplate")
     public CouponTemplateInfo addTemplate(@Valid @RequestBody CouponTemplateInfo request) {
         log.info("Create coupon template: data={}", request);
         return couponTemplateService.createTemplate(request);
@@ -34,7 +34,7 @@ public class CouponTemplateController {
     /**
      * 读取优惠券
      */
-    @GetMapping("/get")
+    @GetMapping("/getTemplate")
     public CouponTemplateInfo getTemplate(@RequestParam("id") Long id){
         log.info("Load template, id={}", id);
         return couponTemplateService.loadTemplateInfo(id);
