@@ -1,4 +1,4 @@
-package com.geekbang.coupon.customer.dao.convertor;
+package com.geekbang.coupon.customer.service;
 
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.template.api.beans.CouponInfo;

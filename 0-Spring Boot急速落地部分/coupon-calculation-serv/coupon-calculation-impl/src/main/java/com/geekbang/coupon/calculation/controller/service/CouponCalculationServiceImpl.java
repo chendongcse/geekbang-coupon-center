@@ -18,6 +18,7 @@ public class CouponCalculationServiceImpl implements CouponCalculationService {
     private CouponProcessorFactory couponProcessorFactory;
 
     // 优惠券结算
+    @Override
     public PlaceOrder computeRule(@RequestBody PlaceOrder settlement) {
         log.info("do calculation: {}", JSON.toJSONString(settlement));
         RuleProcessor ruleProcessor = couponProcessorFactory.getRuleProcessor(settlement);

@@ -6,12 +6,10 @@ import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculation
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.api.enums.CouponStatus;
 import com.geekbang.coupon.customer.dao.CouponDao;
-import com.geekbang.coupon.customer.dao.convertor.CouponConverter;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
 import com.geekbang.coupon.template.api.beans.CouponInfo;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
-//import com.geekbang.coupon.template.service.intf.CouponTemplateService;
 import com.geekbang.coupon.template.service.intf.CouponTemplateService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -35,18 +33,10 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     private CouponDao couponDao;
 
     @Autowired
-    private CouponTemplateService templateClient;
+    private CouponTemplateService templateService;
 
     @Autowired
-    private CouponCalculationService calculationClient;
-
-//    @Autowired
-//    private TemplateClient templateClient;
-//
-//    @Autowired
-//    private CalculationClient calculationClient;
-
-
+    private CouponCalculationService calculationService;
 
     /**
      * 用户查询优惠券的接口
@@ -66,7 +56,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         List<Long> templateIds = coupons.stream()
                 .map(Coupon::getTemplateId)
                 .collect(Collectors.toList());
-        Map<Long, CouponTemplateInfo> templateMap = templateClient.getTemplateInfoMap(templateIds);
+        Map<Long, CouponTemplateInfo> templateMap = templateService.getTemplateInfoMap(templateIds);
         coupons.stream().forEach(e -> e.setTemplateInfo(templateMap.get(e.getTemplateId())));
 
         return coupons.stream()
@@ -79,7 +69,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
      */
     @Override
     public Coupon requestCoupon(RequestCoupon request) {
-        CouponTemplateInfo templateInfo = templateClient.loadTemplateInfo(request.getCouponTemplateId());
+        CouponTemplateInfo templateInfo = templateService.loadTemplateInfo(request.getCouponTemplateId());
 
         // 模板不存在则报错
         if (templateInfo == null) {
@@ -133,12 +123,12 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                     .orElseThrow(() -> new RuntimeException("Coupon not found"));
 
             CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
-            couponInfo.setTemplate(templateClient.loadTemplateInfo(coupon.getTemplateId()));
+            couponInfo.setTemplate(templateService.loadTemplateInfo(coupon.getTemplateId()));
             order.setCouponInfos(Lists.newArrayList(couponInfo));
         }
 
         // order清算
-        PlaceOrder checkoutInfo = calculationClient.computeRule(order);
+        PlaceOrder checkoutInfo = calculationService.computeRule(order);
 
         // 如果清算结果里没有优惠券，而用户传递了优惠券，报错提示该订单满足不了优惠条件
         if (CollectionUtils.isEmpty(checkoutInfo.getCouponInfos()) && coupon != null) {

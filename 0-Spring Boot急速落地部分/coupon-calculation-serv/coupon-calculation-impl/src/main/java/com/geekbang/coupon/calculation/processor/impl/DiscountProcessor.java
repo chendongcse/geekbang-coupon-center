@@ -1,14 +1,9 @@
 package com.geekbang.coupon.calculation.processor.impl;
 
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
 import com.geekbang.coupon.calculation.processor.AbstractRuleProcessor;
 import com.geekbang.coupon.calculation.processor.RuleProcessor;
-import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * 打折优惠券

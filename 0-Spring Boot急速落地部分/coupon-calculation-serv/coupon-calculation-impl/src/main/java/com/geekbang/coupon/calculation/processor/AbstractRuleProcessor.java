@@ -1,11 +1,9 @@
 package com.geekbang.coupon.calculation.processor;
 
 
-
 import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
 import com.geekbang.coupon.calculation.api.beans.Product;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -87,4 +85,5 @@ public abstract class AbstractRuleProcessor implements RuleProcessor {
     protected long convertToDecimal(Double value) {
         return new BigDecimal(value).setScale(0, RoundingMode.HALF_UP).longValue();
     }
+
 }

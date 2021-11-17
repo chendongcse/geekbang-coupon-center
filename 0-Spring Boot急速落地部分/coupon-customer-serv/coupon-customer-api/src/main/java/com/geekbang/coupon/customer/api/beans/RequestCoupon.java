@@ -16,9 +16,8 @@ public class RequestCoupon {
     @NotNull
     private Long userId;
 
+    // 券模板ID
     @NotNull
     private Long couponTemplateId;
 
-    /** 优惠券模板信息 */
-    private CouponTemplateInfo templateSDK;
 }
