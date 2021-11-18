@@ -1,6 +1,6 @@
 package com.geekbang.coupon.customer.controller;
 
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
+import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
@@ -35,7 +35,7 @@ public class CouponCustomerController {
 
     // ResponseEntity - 指定返回状态码 - 可以作为一个课后思考题
     @PostMapping("placeOrder")
-    public PlaceOrder checkout(@Valid @RequestBody PlaceOrder info) {
+    public ShoppingCart checkout(@Valid @RequestBody ShoppingCart info) {
         return couponUserService.placeOrder(info);
     }
 

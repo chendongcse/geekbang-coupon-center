@@ -3,8 +3,6 @@ server:
 # 在返回给页面的结果里，把错误信息添加到message里
   error:
     include-message: always
-#  servlet:
-#    context-path: /coupon-template
 
 spring:
   application:

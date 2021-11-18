@@ -28,6 +28,7 @@ public class Coupon {
     private Long id;
 
     // 对应的模板ID - 不使用one to one映射
+    // 不推荐使用级联查询的原因是为了防止滥用而导致的DB性能问题
     @Column(name = "template_id", nullable = false)
     private Long templateId;
 

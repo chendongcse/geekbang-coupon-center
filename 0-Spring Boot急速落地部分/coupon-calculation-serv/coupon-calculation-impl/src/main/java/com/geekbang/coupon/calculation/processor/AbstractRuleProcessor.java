@@ -1,7 +1,7 @@
 package com.geekbang.coupon.calculation.processor;
 
 
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
+import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.calculation.api.beans.Product;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractRuleProcessor implements RuleProcessor {
 
     @Override
-    public PlaceOrder calculate(PlaceOrder order) {
+    public ShoppingCart calculate(ShoppingCart order) {
         // 获取订单总价
         Long orderTotalAmount = getTotalPrice(order.getProducts());
         // 获取以shopId为维度的价格统计

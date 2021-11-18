@@ -1,7 +1,7 @@
 package com.geekbang.coupon.calculation.controller.service;
 
 import com.alibaba.fastjson.JSON;
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
+import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculationService;
 import com.geekbang.coupon.calculation.processor.CouponProcessorFactory;
 import com.geekbang.coupon.calculation.processor.RuleProcessor;
@@ -19,8 +19,8 @@ public class CouponCalculationServiceImpl implements CouponCalculationService {
 
     // 优惠券结算
     @Override
-    public PlaceOrder computeRule(@RequestBody PlaceOrder settlement) {
-        log.info("do calculation: {}", JSON.toJSONString(settlement));
+    public ShoppingCart computeRule(@RequestBody ShoppingCart settlement) {
+        log.info("calculate order price: {}", JSON.toJSONString(settlement));
         RuleProcessor ruleProcessor = couponProcessorFactory.getRuleProcessor(settlement);
         return ruleProcessor.calculate(settlement);
     }

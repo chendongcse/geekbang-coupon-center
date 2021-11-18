@@ -1,6 +1,6 @@
 package com.geekbang.coupon.calculation.processor;
 
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
+import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.calculation.processor.impl.DiscountProcessor;
 import com.geekbang.coupon.calculation.processor.impl.DummyProcessor;
 import com.geekbang.coupon.calculation.processor.impl.MoneyOffProcessor;
@@ -24,15 +24,15 @@ public class CouponProcessorFactory {
     @Autowired
     private DummyProcessor dummyProcessor;
 
-    public RuleProcessor getRuleProcessor(PlaceOrder order) {
+    public RuleProcessor getRuleProcessor(ShoppingCart order) {
         // 不使用优惠券
         if (CollectionUtils.isEmpty(order.getCouponInfos())) {
             return dummyProcessor;
         }
 
         if (order.getCouponInfos().size() > 1) {
-            log.error("cannot apply multiple coupons to one order");
-            throw new IllegalArgumentException("Only one coupon per order");
+            log.error("不能使用多张优惠券");
+            throw new IllegalArgumentException("Cannot apply multiple coupons to one order");
         }
 
         // 获取优惠券的类别

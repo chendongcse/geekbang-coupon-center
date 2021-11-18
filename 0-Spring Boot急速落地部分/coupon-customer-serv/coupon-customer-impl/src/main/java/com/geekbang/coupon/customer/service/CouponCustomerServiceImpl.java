@@ -1,7 +1,7 @@
 package com.geekbang.coupon.customer.service;
 
 
-import com.geekbang.coupon.calculation.api.beans.PlaceOrder;
+import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculationService;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.api.enums.CouponStatus;
@@ -104,7 +104,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Override
     @Transactional
-    public PlaceOrder placeOrder(PlaceOrder order) {
+    public ShoppingCart placeOrder(ShoppingCart order) {
         if (CollectionUtils.isEmpty(order.getProducts())) {
             throw new IllegalArgumentException("empty cart");
         }
@@ -128,12 +128,12 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         }
 
         // order清算
-        PlaceOrder checkoutInfo = calculationService.computeRule(order);
+        ShoppingCart checkoutInfo = calculationService.computeRule(order);
 
         // 如果清算结果里没有优惠券，而用户传递了优惠券，报错提示该订单满足不了优惠条件
         if (CollectionUtils.isEmpty(checkoutInfo.getCouponInfos()) && coupon != null) {
             log.error("cannot apply coupponId={} to order", coupon.getId());
-            throw new IllegalArgumentException("Not an eligible coupon");
+            throw new IllegalArgumentException("coupon is not applicable to this order");
         }
 
         if (coupon != null) {
