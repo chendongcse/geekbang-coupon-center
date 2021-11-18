@@ -9,10 +9,10 @@ public class CouponConverter {
 
         return CouponInfo.builder()
                 .id(coupon.getId())
-                .templateId(coupon.getTemplateId())
                 .status(coupon.getStatus().getCode())
-                .userId(coupon.getUserId())
+                .templateId(coupon.getTemplateId())
                 .shopId(coupon.getShopId())
+                .userId(coupon.getUserId())
                 .template(coupon.getTemplateInfo())
                 .build();
     }

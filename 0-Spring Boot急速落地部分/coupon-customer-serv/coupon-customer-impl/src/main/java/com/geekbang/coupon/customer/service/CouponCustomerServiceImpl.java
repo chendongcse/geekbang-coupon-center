@@ -120,6 +120,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
             coupon = couponDao.findAll(Example.of(example))
                     .stream()
                     .findFirst()
+                    // 如果找不到券，就抛出异常
                     .orElseThrow(() -> new RuntimeException("Coupon not found"));
 
             CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);

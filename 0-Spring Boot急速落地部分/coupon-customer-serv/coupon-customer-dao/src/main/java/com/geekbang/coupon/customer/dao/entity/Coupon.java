@@ -40,17 +40,17 @@ public class Coupon {
     @Column(name = "shop_id")
     private Long shopId;
 
-    // 获取时间自动生成
-    @CreatedDate
-    @Column(name = "created_time", nullable = false)
-    private Date createdTime;
-
-    /** 优惠券状态 */
+    // 优惠券的使用/未使用状态
     @Column(name = "status", nullable = false)
     @Convert(converter = CouponStatusConverter.class)
     private CouponStatus status;
 
+    // 被Transient标记的属性是不会被持久化的
     @Transient
     private CouponTemplateInfo templateInfo;
 
+    // 获取时间自动生成
+    @CreatedDate
+    @Column(name = "created_time", nullable = false)
+    private Date createdTime;
 }

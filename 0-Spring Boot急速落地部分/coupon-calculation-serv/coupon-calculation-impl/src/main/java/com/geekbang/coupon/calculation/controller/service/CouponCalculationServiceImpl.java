@@ -18,6 +18,7 @@ public class CouponCalculationServiceImpl implements CouponCalculationService {
     private CouponProcessorFactory couponProcessorFactory;
 
     // 优惠券结算
+    // 这里通过Factory类决定使用哪个底层Rule，底层规则对上层透明
     @Override
     public ShoppingCart computeRule(@RequestBody ShoppingCart settlement) {
         log.info("calculate order price: {}", JSON.toJSONString(settlement));

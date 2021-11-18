@@ -5,9 +5,7 @@ import lombok.Getter;
 
 import java.util.stream.Stream;
 
-/**
- * 优惠券的状态
- */
+// 优惠券的状态
 @Getter
 @AllArgsConstructor
 public enum CouponStatus {

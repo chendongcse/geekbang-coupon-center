@@ -30,6 +30,7 @@ public class CouponProcessorFactory {
             return dummyProcessor;
         }
 
+        // 暂时不支持多张优惠券
         if (order.getCouponInfos().size() > 1) {
             log.error("不能使用多张优惠券");
             throw new IllegalArgumentException("Cannot apply multiple coupons to one order");
