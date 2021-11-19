@@ -2,6 +2,8 @@ package com.geekbang.coupon.customer.service.intf;
 
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
+import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
+import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.template.api.beans.CouponInfo;
@@ -19,4 +21,8 @@ public interface CouponCustomerService {
 
     // 核销优惠券
     ShoppingCart placeOrder(ShoppingCart info);
+
+    // 核销优惠券
+    SimulationResponse simulateOrderPrice(SimulationOrder order);
+
 }

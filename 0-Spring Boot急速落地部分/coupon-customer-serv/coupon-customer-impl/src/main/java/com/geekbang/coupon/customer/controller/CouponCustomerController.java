@@ -1,6 +1,8 @@
 package com.geekbang.coupon.customer.controller;
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
+import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
+import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
@@ -20,6 +22,7 @@ public class CouponCustomerController {
     @Autowired
     private CouponCustomerService couponUserService;
 
+
     @GetMapping("findCoupon")
     public List<CouponInfo> findCoupon(@RequestParam("userId") Long userId,
                                        @RequestParam(value = "status", required = false) Integer status,
@@ -32,6 +35,11 @@ public class CouponCustomerController {
         return couponUserService.requestCoupon(request);
     }
 
+    // ResponseEntity - 指定返回状态码 - 可以作为一个课后思考题
+    @PostMapping("simulateOrder")
+    public SimulationResponse simulate(@Valid @RequestBody SimulationOrder order) {
+        return couponUserService.simulateOrderPrice(order);
+    }
 
     // ResponseEntity - 指定返回状态码 - 可以作为一个课后思考题
     @PostMapping("placeOrder")

@@ -2,6 +2,8 @@ package com.geekbang.coupon.calculation.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
+import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
+import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +23,13 @@ public class CouponCalculationController {
     public ShoppingCart computeRule(@RequestBody ShoppingCart settlement) {
         log.info("do calculation: {}", JSON.toJSONString(settlement));
         return couponCalculationService.computeRule(settlement);
+    }
+
+
+    @PostMapping("/simulate")
+    @ResponseBody
+    public SimulationResponse simulate(@RequestBody SimulationOrder order) {
+        log.info("do calculation: {}", JSON.toJSONString(order));
+        return couponCalculationService.simulateOrder(order);
     }
 }

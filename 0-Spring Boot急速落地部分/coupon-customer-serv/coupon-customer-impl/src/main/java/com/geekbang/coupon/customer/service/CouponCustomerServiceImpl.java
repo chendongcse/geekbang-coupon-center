@@ -2,6 +2,8 @@ package com.geekbang.coupon.customer.service;
 
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
+import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
+import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculationService;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
 import com.geekbang.coupon.customer.api.enums.CouponStatus;
@@ -23,6 +25,7 @@ import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,6 +40,34 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Autowired
     private CouponCalculationService calculationService;
+
+
+    @Override
+    public SimulationResponse simulateOrderPrice(SimulationOrder order) {
+        List<CouponInfo> couponInfos = Lists.newArrayList();
+        // 挨个循环，把优惠券信息加载出来
+        for (Long couponId : order.getCouponIDs()) {
+            Coupon example = Coupon.builder()
+                    .userId(order.getUserId())
+                    .id(couponId)
+                    .status(CouponStatus.AVAILABLE)
+                    .build();
+            Optional<Coupon> couponOptional = couponDao.findAll(Example.of(example))
+                    .stream()
+                    .findFirst();
+            // 加载优惠券模板信息
+            if (couponOptional.isPresent()) {
+                Coupon coupon = couponOptional.get();
+                CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
+                couponInfo.setTemplate(templateService.loadTemplateInfo(coupon.getTemplateId()));
+                couponInfos.add(couponInfo);
+            }
+        }
+        order.setCouponInfos(couponInfos);
+
+        // 调用接口试算服务
+        return calculationService.simulateOrder(order);
+    }
 
     /**
      * 用户查询优惠券的接口
