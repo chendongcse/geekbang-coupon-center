@@ -28,6 +28,8 @@ public class CouponTemplateFactory {
 
     @Autowired
     private DummyTemplate dummyTemplate;
+    @Autowired
+    private AntiPuaTemplate antiPuaTemplate;
 
     public RuleTemplate getTemplate(ShoppingCart order) {
         // 不使用优惠券
@@ -59,6 +61,8 @@ public class CouponTemplateFactory {
             // 打折券
             case DISCOUNT:
                 return discountTemplate;
+            case ANTI_PUA:
+                return antiPuaTemplate;
             // 未知类型的券模板
             default:
                 return dummyTemplate;
