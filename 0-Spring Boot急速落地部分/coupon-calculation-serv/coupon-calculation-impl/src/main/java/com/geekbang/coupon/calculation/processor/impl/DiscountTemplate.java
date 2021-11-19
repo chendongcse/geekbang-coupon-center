@@ -1,7 +1,7 @@
 package com.geekbang.coupon.calculation.processor.impl;
 
-import com.geekbang.coupon.calculation.processor.AbstractRuleProcessor;
-import com.geekbang.coupon.calculation.processor.RuleProcessor;
+import com.geekbang.coupon.calculation.processor.AbstractRuleTemplate;
+import com.geekbang.coupon.calculation.processor.RuleTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class DiscountProcessor extends AbstractRuleProcessor implements RuleProcessor {
+public class DiscountTemplate extends AbstractRuleTemplate implements RuleTemplate {
 
     @Override
     protected Long calculateNewPrice(Long totalAmount, Long shopAmount, Long quota) {

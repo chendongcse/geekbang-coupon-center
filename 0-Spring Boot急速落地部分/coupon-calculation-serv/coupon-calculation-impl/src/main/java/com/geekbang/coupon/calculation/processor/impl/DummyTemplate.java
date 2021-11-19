@@ -1,8 +1,8 @@
 package com.geekbang.coupon.calculation.processor.impl;
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
-import com.geekbang.coupon.calculation.processor.AbstractRuleProcessor;
-import com.geekbang.coupon.calculation.processor.RuleProcessor;
+import com.geekbang.coupon.calculation.processor.AbstractRuleTemplate;
+import com.geekbang.coupon.calculation.processor.RuleTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class DummyProcessor extends AbstractRuleProcessor implements RuleProcessor {
+public class DummyTemplate extends AbstractRuleTemplate implements RuleTemplate {
 
     @Override
     public ShoppingCart calculate(ShoppingCart order) {

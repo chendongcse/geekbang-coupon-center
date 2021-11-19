@@ -12,7 +12,8 @@ public enum CouponType {
 
     UNKNOWN("unknown", "0"),
     MONEY_OFF("满减券", "1"),
-    DISCOUNT("打折", "2");
+    DISCOUNT("打折", "2"),
+    RANDOM_DISCOUNT("随机减", "3");
 
     private String description;
 

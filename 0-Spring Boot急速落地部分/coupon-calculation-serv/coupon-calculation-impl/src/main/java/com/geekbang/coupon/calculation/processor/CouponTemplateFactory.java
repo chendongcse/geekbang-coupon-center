@@ -1,9 +1,10 @@
 package com.geekbang.coupon.calculation.processor;
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
-import com.geekbang.coupon.calculation.processor.impl.DiscountProcessor;
-import com.geekbang.coupon.calculation.processor.impl.DummyProcessor;
-import com.geekbang.coupon.calculation.processor.impl.MoneyOffProcessor;
+import com.geekbang.coupon.calculation.processor.impl.DiscountTemplate;
+import com.geekbang.coupon.calculation.processor.impl.DummyTemplate;
+import com.geekbang.coupon.calculation.processor.impl.MoneyOffTemplate;
+import com.geekbang.coupon.calculation.processor.impl.RandomReductionTemplate;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import com.geekbang.coupon.template.api.enums.CouponType;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +14,21 @@ import org.springframework.util.CollectionUtils;
 
 @Component
 @Slf4j
-public class CouponProcessorFactory {
+public class CouponTemplateFactory {
 
     @Autowired
-    private MoneyOffProcessor moneyOffProcessor;
+    private MoneyOffTemplate moneyOffProcessor;
 
     @Autowired
-    private DiscountProcessor discountProcessor;
+    private DiscountTemplate discountProcessor;
 
     @Autowired
-    private DummyProcessor dummyProcessor;
+    private RandomReductionTemplate randomReductionProcessor;
 
-    public RuleProcessor getRuleProcessor(ShoppingCart order) {
+    @Autowired
+    private DummyTemplate dummyProcessor;
+
+    public RuleTemplate getTemplate(ShoppingCart order) {
         // 不使用优惠券
         if (CollectionUtils.isEmpty(order.getCouponInfos())) {
             return dummyProcessor;
@@ -45,6 +49,8 @@ public class CouponProcessorFactory {
                 return moneyOffProcessor;
             case DISCOUNT:
                 return discountProcessor;
+            case RANDOM_DISCOUNT:
+                return randomReductionProcessor;
             // 未知类型的券模板
             default:
                 return dummyProcessor;

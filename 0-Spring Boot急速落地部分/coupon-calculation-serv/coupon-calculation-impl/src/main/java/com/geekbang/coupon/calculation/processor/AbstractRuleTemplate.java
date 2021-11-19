@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * 定义通用的计算逻辑
  */
 @Slf4j
-public abstract class AbstractRuleProcessor implements RuleProcessor {
+public abstract class AbstractRuleTemplate implements RuleTemplate {
 
     @Override
     public ShoppingCart calculate(ShoppingCart order) {
@@ -26,6 +26,7 @@ public abstract class AbstractRuleProcessor implements RuleProcessor {
         // 获取以shopId为维度的价格统计
         Map<Long, Long> sumAmount = this.getTotalPriceGroupByShop(order.getProducts());
 
+        // 以下规则只做单个优惠券的计算
         CouponTemplateInfo template = order.getCouponInfos().get(0).getTemplate();
         // 最低消费限制
         Long threshold = template.getRule().getDiscount().getThreshold();

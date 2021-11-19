@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface CouponCalculationService {
 
-    public ShoppingCart computeRule(@RequestBody ShoppingCart settlement);
+    ShoppingCart computeRule(@RequestBody ShoppingCart cart);
 }
