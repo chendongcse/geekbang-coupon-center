@@ -22,7 +22,8 @@ public interface CouponCustomerService {
     // 核销优惠券
     ShoppingCart placeOrder(ShoppingCart info);
 
-    // 核销优惠券
+    // 优惠券金额试算
     SimulationResponse simulateOrderPrice(SimulationOrder order);
 
+    void deleteCoupon(Long userId, Long couponId);
 }

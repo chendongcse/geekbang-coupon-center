@@ -175,4 +175,22 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         return checkoutInfo;
     }
 
+    // 逻辑删除优惠券
+    @Override
+    public void deleteCoupon(Long userId, Long couponId) {
+        Coupon example = Coupon.builder()
+                .userId(userId)
+                .id(couponId)
+                .status(CouponStatus.AVAILABLE)
+                .build();
+        Coupon coupon = couponDao.findAll(Example.of(example))
+                .stream()
+                .findFirst()
+                // 如果找不到券，就抛出异常
+                .orElseThrow(() -> new RuntimeException("Could not find available coupon"));
+
+        coupon.setStatus(CouponStatus.INACTIVE);
+        couponDao.save(coupon);
+    }
+
 }

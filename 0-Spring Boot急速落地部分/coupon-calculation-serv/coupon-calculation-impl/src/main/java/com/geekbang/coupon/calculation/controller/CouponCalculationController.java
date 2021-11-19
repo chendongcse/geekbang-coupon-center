@@ -25,11 +25,12 @@ public class CouponCalculationController {
         return couponCalculationService.computeRule(settlement);
     }
 
-
+    // 优惠券列表挨个试算
+    // 给客户提示每个可用券的优惠额度，帮助挑选
     @PostMapping("/simulate")
     @ResponseBody
-    public SimulationResponse simulate(@RequestBody SimulationOrder order) {
-        log.info("do calculation: {}", JSON.toJSONString(order));
-        return couponCalculationService.simulateOrder(order);
+    public SimulationResponse simulate(@RequestBody SimulationOrder simulator) {
+        log.info("do simulation: {}", JSON.toJSONString(simulator));
+        return couponCalculationService.simulateOrder(simulator);
     }
 }

@@ -35,7 +35,14 @@ public class CouponCustomerController {
         return couponUserService.requestCoupon(request);
     }
 
-    // ResponseEntity - 指定返回状态码 - 可以作为一个课后思考题
+    // 用户模拟计算每个优惠券的优惠价格
+    @DeleteMapping("deleteCoupon")
+    public void simulate(@RequestParam("userId") Long userId,
+                                       @RequestParam("couponId") Long couponId) {
+        couponUserService.deleteCoupon(userId, couponId);
+    }
+
+    // 用户模拟计算每个优惠券的优惠价格
     @PostMapping("simulateOrder")
     public SimulationResponse simulate(@Valid @RequestBody SimulationOrder order) {
         return couponUserService.simulateOrderPrice(order);
