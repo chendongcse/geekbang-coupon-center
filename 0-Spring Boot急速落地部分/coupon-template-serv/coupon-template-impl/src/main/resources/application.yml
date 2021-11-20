@@ -1,8 +1,8 @@
 # 项目的启动端口
 server:
   port: 20000
-#  servlet:
-#    context-path: /coupon-template
+  error:
+    include-message: always
 
 spring:
   application:

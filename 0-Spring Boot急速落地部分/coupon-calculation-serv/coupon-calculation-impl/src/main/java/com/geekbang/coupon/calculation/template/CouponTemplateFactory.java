@@ -1,7 +1,7 @@
-package com.geekbang.coupon.calculation.processor;
+package com.geekbang.coupon.calculation.template;
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
-import com.geekbang.coupon.calculation.processor.impl.*;
+import com.geekbang.coupon.calculation.template.impl.*;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import com.geekbang.coupon.template.api.enums.CouponType;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class CouponTemplateFactory {
     @Autowired
     private DummyTemplate dummyTemplate;
     @Autowired
-    private AntiPuaTemplate antiPuaTemplate;
+    private AntiPauTemplate antiPauTemplate;
 
     public RuleTemplate getTemplate(ShoppingCart order) {
         // 不使用优惠券
@@ -62,7 +62,7 @@ public class CouponTemplateFactory {
             case DISCOUNT:
                 return discountTemplate;
             case ANTI_PUA:
-                return antiPuaTemplate;
+                return antiPauTemplate;
             // 未知类型的券模板
             default:
                 return dummyTemplate;

@@ -24,7 +24,7 @@ public enum CouponType {
 
     public static CouponType convert(String code) {
         return Stream.of(values())
-                .filter(bean -> bean.code.equalsIgnoreCase(code))
+                .filter(couponType -> couponType.code.equalsIgnoreCase(code))
                 .findFirst()
                 .orElse(UNKNOWN);
     }

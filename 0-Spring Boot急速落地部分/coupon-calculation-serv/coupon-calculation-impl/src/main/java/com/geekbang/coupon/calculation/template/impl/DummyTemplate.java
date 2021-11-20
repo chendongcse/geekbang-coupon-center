@@ -1,8 +1,8 @@
-package com.geekbang.coupon.calculation.processor.impl;
+package com.geekbang.coupon.calculation.template.impl;
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
-import com.geekbang.coupon.calculation.processor.AbstractRuleTemplate;
-import com.geekbang.coupon.calculation.processor.RuleTemplate;
+import com.geekbang.coupon.calculation.template.AbstractRuleTemplate;
+import com.geekbang.coupon.calculation.template.RuleTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

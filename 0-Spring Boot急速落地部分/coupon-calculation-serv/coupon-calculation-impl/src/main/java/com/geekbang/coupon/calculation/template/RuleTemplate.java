@@ -1,4 +1,4 @@
-package com.geekbang.coupon.calculation.processor;
+package com.geekbang.coupon.calculation.template;
 
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;

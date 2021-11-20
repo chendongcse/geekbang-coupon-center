@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 public class CouponCalculationController {
 
     @Autowired
-    private CouponCalculationService couponCalculationService;
+    private CouponCalculationService calculationService;
 
     // 优惠券结算
     @PostMapping("/checkout")
     @ResponseBody
     public ShoppingCart computeRule(@RequestBody ShoppingCart settlement) {
         log.info("do calculation: {}", JSON.toJSONString(settlement));
-        return couponCalculationService.computeRule(settlement);
+        return calculationService.computeRule(settlement);
     }
 
     // 优惠券列表挨个试算
@@ -31,6 +31,6 @@ public class CouponCalculationController {
     @ResponseBody
     public SimulationResponse simulate(@RequestBody SimulationOrder simulator) {
         log.info("do simulation: {}", JSON.toJSONString(simulator));
-        return couponCalculationService.simulateOrder(simulator);
+        return calculationService.simulateOrder(simulator);
     }
 }

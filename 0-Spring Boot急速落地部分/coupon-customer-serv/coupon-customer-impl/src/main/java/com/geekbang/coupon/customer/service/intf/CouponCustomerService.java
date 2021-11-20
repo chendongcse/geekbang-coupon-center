@@ -13,9 +13,6 @@ import java.util.List;
 // 用户对接服务
 public interface CouponCustomerService {
 
-    // 查询用户优惠券
-    List<CouponInfo> findCoupon(Long userId, Integer status, Long shopId);
-
     // 领券接口
     Coupon requestCoupon(RequestCoupon request);
 
@@ -26,4 +23,8 @@ public interface CouponCustomerService {
     SimulationResponse simulateOrderPrice(SimulationOrder order);
 
     void deleteCoupon(Long userId, Long couponId);
+
+    // 查询用户优惠券
+    @Deprecated
+    List<CouponInfo> findCoupon(Long userId, Integer status, Long shopId);
 }

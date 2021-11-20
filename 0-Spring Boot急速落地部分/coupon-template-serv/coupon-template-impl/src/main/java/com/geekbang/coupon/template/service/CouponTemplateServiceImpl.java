@@ -5,8 +5,10 @@ import com.geekbang.coupon.template.api.beans.rules.Discount;
 import com.geekbang.coupon.template.api.enums.CouponType;
 import com.geekbang.coupon.template.converter.CouponTemplateConverter;
 import com.geekbang.coupon.template.dao.CouponTemplateDao;
+import com.geekbang.coupon.template.dao.entity.CouponTemplate;
 import com.geekbang.coupon.template.service.intf.CouponTemplateService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,23 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     @Autowired
     private CouponTemplateDao templateDao;
 
+    // 克隆优惠券
+    @Override
+    public CouponTemplateInfo cloneTemplate(Long templateId) {
+        log.info("cloning template id {}", templateId);
+        CouponTemplate source = templateDao.findById(templateId)
+                .orElseThrow(() -> new IllegalArgumentException("invalid template ID"));
+
+        CouponTemplate target = new CouponTemplate();
+        BeanUtils.copyProperties(source, target);
+
+        target.setAvailable(true);
+        target.setId(null);
+
+        templateDao.save(target);
+        return CouponTemplateConverter.convertToTemplateInfo(target);
+    }
+
     /**
      * 创建优惠券模板
      */
@@ -44,7 +63,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
         }
 
         // 创建优惠券
-        com.geekbang.coupon.template.dao.entity.CouponTemplate template = com.geekbang.coupon.template.dao.entity.CouponTemplate.builder()
+        CouponTemplate template = CouponTemplate.builder()
                 .name(request.getName())
                 .description(request.getDesc())
                 .total(request.getTotal())
@@ -81,11 +100,8 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
      */
     @Override
     public CouponTemplateInfo loadTemplateInfo(Long id) {
-        Optional<com.geekbang.coupon.template.dao.entity.CouponTemplate> template = templateDao.findById(id);
-        if (!template.isPresent()) {
-            return null;
-        }
-        return CouponTemplateConverter.convertToTemplateInfo(template.get());
+        Optional<CouponTemplate> template = templateDao.findById(id);
+        return template.isPresent() ? CouponTemplateConverter.convertToTemplateInfo(template.get()) : null;
     }
 
     // 将券无效化

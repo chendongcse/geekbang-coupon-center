@@ -46,6 +46,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     public SimulationResponse simulateOrderPrice(SimulationOrder order) {
         List<CouponInfo> couponInfos = Lists.newArrayList();
         // 挨个循环，把优惠券信息加载出来
+        // 高并发场景下不能这么一个个循环，更好的做法是批量查询
+        // 而且券模板一旦创建不会改内容，所以在创建端做数据异构放到缓存里，使用端从缓存捞template信息
         for (Long couponId : order.getCouponIDs()) {
             Coupon example = Coupon.builder()
                     .userId(order.getUserId())
@@ -72,6 +74,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     /**
      * 用户查询优惠券的接口
      */
+    @Deprecated
     @Override
     public List<CouponInfo> findCoupon(Long userId, Integer status, Long shopId) {
         Coupon example = Coupon.builder()

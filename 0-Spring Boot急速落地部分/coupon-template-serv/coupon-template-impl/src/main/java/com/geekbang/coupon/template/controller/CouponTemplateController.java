@@ -20,40 +20,34 @@ public class CouponTemplateController {
     @Autowired
     private CouponTemplateService couponTemplateService;
 
-    /**
-     * 创建优惠券
-     *
-     * localhost:20000/template/add
-     */
+    // 创建优惠券
     @PostMapping("/addTemplate")
     public CouponTemplateInfo addTemplate(@Valid @RequestBody CouponTemplateInfo request) {
         log.info("Create coupon template: data={}", request);
         return couponTemplateService.createTemplate(request);
     }
 
-    /**
-     * 读取优惠券
-     */
+    @PostMapping("/cloneTemplate")
+    public CouponTemplateInfo cloneTemplate(@RequestParam("id") Long templateId) {
+        log.info("Clone coupon template: data={}", templateId);
+        return couponTemplateService.cloneTemplate(templateId);
+    }
+
+    // 读取优惠券
     @GetMapping("/getTemplate")
     public CouponTemplateInfo getTemplate(@RequestParam("id") Long id){
         log.info("Load template, id={}", id);
         return couponTemplateService.loadTemplateInfo(id);
     }
 
-    /**
-     * 批量获取
-     */
+    // 批量获取
     @GetMapping("/getBatch")
     public Map<Long, CouponTemplateInfo> getTemplateInBatch(@RequestParam("ids") Collection<Long> ids) {
         log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
         return couponTemplateService.getTemplateInfoMap(ids);
     }
 
-    /**
-     * 搜索模板
-     *
-     * 可以根据name，shop id，available三样搜索
-     */
+    // 搜索模板
     @GetMapping("/search")
     public List<CouponTemplateInfo> searchTemplate(@RequestBody CouponTemplateInfo request) {
         log.info("search templates, payload={}", request);

@@ -1,4 +1,4 @@
-package com.geekbang.coupon.calculation.processor;
+package com.geekbang.coupon.calculation.template;
 
 
 import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
@@ -41,7 +41,7 @@ public abstract class AbstractRuleTemplate implements RuleTemplate {
 
         // 如果不符合优惠券使用标准, 则直接按原价走，不使用优惠券
         if (shopTotalAmount == null || shopTotalAmount < threshold) {
-            log.debug("Totals of amount not meet");
+            log.warn("Totals of amount not meet, ur coupons are not applicable to this order");
             order.setCost(orderTotalAmount);
             order.setCouponInfos(Collections.emptyList());
             return order;
@@ -49,6 +49,7 @@ public abstract class AbstractRuleTemplate implements RuleTemplate {
 
         // 子类中计算新的价格
         Long newCost = calculateNewPrice(orderTotalAmount, shopTotalAmount, quota);
+        // 订单价格不能小于最低价格
         if (newCost < minCost()) {
             newCost = minCost();
         }
