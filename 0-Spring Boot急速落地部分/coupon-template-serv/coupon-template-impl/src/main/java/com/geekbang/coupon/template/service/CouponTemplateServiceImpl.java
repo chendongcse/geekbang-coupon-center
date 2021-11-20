@@ -107,7 +107,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     // 将券无效化
     @Override
     @Transactional
-    public void inactiveCoupon(Long id) {
+    public void deleteTemplate(Long id) {
         int rows = templateDao.makeCouponUnavailable(id);
         if (rows == 0) {
             throw new IllegalArgumentException("Template Not Found: " + id);

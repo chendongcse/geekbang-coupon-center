@@ -55,9 +55,9 @@ public class CouponTemplateController {
     }
 
     // 优惠券无效化
-    @PutMapping("/inactive")
-    public void inactiveCoupon(@RequestParam("id") Long id){
+    @DeleteMapping("/deleteTemplate")
+    public void deleteTemplate(@RequestParam("id") Long id){
         log.info("Load template, id={}", id);
-        couponTemplateService.inactiveCoupon(id);
+        couponTemplateService.deleteTemplate(id);
     }
 }
