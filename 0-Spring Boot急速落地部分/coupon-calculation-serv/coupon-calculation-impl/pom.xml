@@ -36,4 +36,26 @@
         </dependency>
     </dependencies>
 
+    <!-- 如果要以java -jar命令执行这个应用，记得把这个Plugins注解打开
+         如果这个项目是作为其它项目的依赖，那么就不要添加下面这个注解。
+
+         在Spring Boot阶段，由于我们是通过customer服务来跑单体应用，所以不用加
+         在Spring Cloud阶段，以java -jar 运行项目必须在各个impl项目的pom中加上这个注解
+     -->
+    <!--    <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>-->
+
 </project>
