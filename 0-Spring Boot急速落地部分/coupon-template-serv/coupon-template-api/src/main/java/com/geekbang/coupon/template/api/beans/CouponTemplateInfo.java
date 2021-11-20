@@ -32,10 +32,6 @@ public class CouponTemplateInfo {
     @NotNull
     private String type;
 
-    // 发券总数
-    @NotNull
-    private Integer total;
-
     // 适用门店 - 若无则为全店通用券
     private Long shopId;
 
@@ -44,7 +40,5 @@ public class CouponTemplateInfo {
     private TemplateRule rule;
 
     private Boolean available;
-
-    private Boolean expired;
 
 }

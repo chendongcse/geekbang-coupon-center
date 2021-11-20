@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 通用传递优惠券模板的类
+ * 封装优惠券信息
  */
 @Data
 @NoArgsConstructor
