@@ -35,7 +35,7 @@ public class CouponCalculationServiceImpl implements CouponCalculationService {
     @Override
     public SimulationResponse simulateOrder(@RequestBody SimulationOrder order) {
         SimulationResponse response = new SimulationResponse();
-        Long minOrderPrice = Long.MIN_VALUE;
+        Long minOrderPrice = Long.MAX_VALUE;
 
         // 计算每一个优惠券的订单价格
         for (CouponInfo coupon : order.getCouponInfos()) {

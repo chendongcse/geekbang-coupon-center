@@ -3,6 +3,7 @@ package com.geekbang.coupon.template.dao;
 import com.geekbang.coupon.template.dao.entity.CouponTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,6 @@ public interface CouponTemplateDao
 
     // 根据shop ID + 可用状态查询店铺有多少券模板
     Integer countByShopIdAndAvailable(Long shopId, Boolean available);
-
 
     // 将优惠券设置为不可用
     @Modifying

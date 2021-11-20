@@ -36,10 +36,6 @@ public class CouponTemplate implements Serializable {
     @Column(name = "available", nullable = false)
     private Boolean available;
 
-    // 是否过期
-    @Column(name = "expired", nullable = false)
-    private Boolean expired;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -54,10 +50,6 @@ public class CouponTemplate implements Serializable {
     @Column(name = "type", nullable = false)
     @Convert(converter = CouponTypeConverter.class)
     private CouponType category;
-
-    // 发放总数
-    @Column(name = "total", nullable = false)
-    private Integer total;
 
     // 创建时间，通过@CreateDate注解自动填值（需要配合@JpaAuditing注解在启动类上生效）
     @CreatedDate

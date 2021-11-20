@@ -66,10 +66,8 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
         CouponTemplate template = CouponTemplate.builder()
                 .name(request.getName())
                 .description(request.getDesc())
-                .total(request.getTotal())
                 .category(CouponType.convert(request.getType()))
                 .available(true)
-                .expired(false)
                 .shopId(request.getShopId())
                 .rule(request.getRule())
                 .build();

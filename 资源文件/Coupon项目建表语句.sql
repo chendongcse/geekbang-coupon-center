@@ -6,11 +6,9 @@ DROP IF EXISTS TABLE `geekbang_coupon_db`.`coupon_template`;
 CREATE TABLE IF NOT EXISTS `geekbang_coupon_db`.`coupon_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary ID',
   `available` boolean NOT NULL DEFAULT false COMMENT '是否是可用状态; true: 可用, false: 不可用',
-  `expired` boolean NOT NULL DEFAULT false COMMENT '是否过期; true: 是, false: 否',
   `name` varchar(64) NOT NULL DEFAULT '' COMMENT '优惠券显示名称',
   `description` varchar(256) NOT NULL DEFAULT '' COMMENT '描述信息',
   `type` varchar(10) NOT NULL DEFAULT '' COMMENT '优惠券类型',
-  `total` int(11) NOT NULL DEFAULT '0' COMMENT '发券总数',
   `shop_id` bigint(20) COMMENT '适用门店，如果null则是全店通用',
   `created_time` datetime NOT NULL DEFAULT '2021-01-01 00:00:00' COMMENT '创建',
   `rule` varchar(2000) NOT NULL DEFAULT '' COMMENT '优惠券规则宽字段',
