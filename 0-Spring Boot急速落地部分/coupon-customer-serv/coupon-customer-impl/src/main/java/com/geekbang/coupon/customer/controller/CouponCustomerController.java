@@ -29,7 +29,7 @@ public class CouponCustomerController {
 
     // 用户删除优惠券
     @DeleteMapping("deleteCoupon")
-    public void simulate(@RequestParam("userId") Long userId,
+    public void deleteCoupon(@RequestParam("userId") Long userId,
                                        @RequestParam("couponId") Long couponId) {
         customerService.deleteCoupon(userId, couponId);
     }

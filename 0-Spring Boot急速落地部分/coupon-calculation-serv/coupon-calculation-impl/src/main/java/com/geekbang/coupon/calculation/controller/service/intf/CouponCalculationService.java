@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface CouponCalculationService {
 
-    ShoppingCart computeRule(@RequestBody ShoppingCart cart);
+    ShoppingCart calculateOrderPrice(@RequestBody ShoppingCart cart);
 
     SimulationResponse simulateOrder(@RequestBody SimulationOrder cart);
 }

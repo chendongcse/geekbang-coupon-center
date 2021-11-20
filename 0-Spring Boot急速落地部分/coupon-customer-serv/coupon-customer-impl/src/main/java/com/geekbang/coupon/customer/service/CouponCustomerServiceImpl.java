@@ -163,7 +163,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         }
 
         // order清算
-        ShoppingCart checkoutInfo = calculationService.computeRule(order);
+        ShoppingCart checkoutInfo = calculationService.calculateOrderPrice(order);
 
         // 如果清算结果里没有优惠券，而用户传递了优惠券，报错提示该订单满足不了优惠条件
         if (CollectionUtils.isEmpty(checkoutInfo.getCouponInfos()) && coupon != null) {

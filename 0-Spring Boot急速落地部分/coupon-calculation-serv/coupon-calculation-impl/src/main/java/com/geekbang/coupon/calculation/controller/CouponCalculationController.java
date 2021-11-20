@@ -20,9 +20,9 @@ public class CouponCalculationController {
     // 优惠券结算
     @PostMapping("/checkout")
     @ResponseBody
-    public ShoppingCart computeRule(@RequestBody ShoppingCart settlement) {
+    public ShoppingCart calculateOrderPrice(@RequestBody ShoppingCart settlement) {
         log.info("do calculation: {}", JSON.toJSONString(settlement));
-        return calculationService.computeRule(settlement);
+        return calculationService.calculateOrderPrice(settlement);
     }
 
     // 优惠券列表挨个试算
