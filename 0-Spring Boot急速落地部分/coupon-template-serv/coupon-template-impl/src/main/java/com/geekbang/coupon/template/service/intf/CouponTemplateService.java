@@ -2,6 +2,8 @@ package com.geekbang.coupon.template.service.intf;
 
 
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.TemplateSearchParams;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
@@ -15,8 +17,8 @@ public interface CouponTemplateService {
 
     CouponTemplateInfo cloneTemplate(Long templateId);
 
-    // 模板查询
-    List<CouponTemplateInfo> searchTemplate(CouponTemplateInfo request);
+    // 模板查询（分页）
+    PagedCouponTemplateInfo search(TemplateSearchParams request);
 
     // 通过模板ID查询优惠券模板
     CouponTemplateInfo loadTemplateInfo(Long id);

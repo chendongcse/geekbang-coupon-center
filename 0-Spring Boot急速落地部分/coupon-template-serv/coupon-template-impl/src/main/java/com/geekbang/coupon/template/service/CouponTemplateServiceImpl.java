@@ -1,6 +1,8 @@
 package com.geekbang.coupon.template.service;
 
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.TemplateSearchParams;
 import com.geekbang.coupon.template.api.beans.rules.Discount;
 import com.geekbang.coupon.template.api.enums.CouponType;
 import com.geekbang.coupon.template.converter.CouponTemplateConverter;
@@ -11,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -77,6 +82,31 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     }
 
     @Override
+    public PagedCouponTemplateInfo search(TemplateSearchParams request) {
+        CouponTemplate example = CouponTemplate.builder()
+                .shopId(request.getShopId())
+                .category(CouponType.convert(request.getType()))
+                .available(request.getAvailable())
+                .name(request.getName())
+                .build();
+
+        Pageable page = PageRequest.of(request.getPage(), request.getPageSize());
+        templateDao.findAll(Example.of(example), page);
+
+        Page<CouponTemplate> result = templateDao.findAll(Example.of(example), page);
+        List<CouponTemplateInfo> couponTemplateInfos = result.stream()
+                .map(CouponTemplateConverter::convertToTemplateInfo)
+                .collect(Collectors.toList());
+
+        PagedCouponTemplateInfo response = PagedCouponTemplateInfo.builder()
+                .templates(couponTemplateInfos)
+                .page(request.getPage())
+                .total(result.getTotalElements())
+                .build();
+
+        return response;
+    }
+
     public List<CouponTemplateInfo> searchTemplate(CouponTemplateInfo request) {
         com.geekbang.coupon.template.dao.entity.CouponTemplate example = com.geekbang.coupon.template.dao.entity.CouponTemplate.builder()
                 .shopId(request.getShopId())

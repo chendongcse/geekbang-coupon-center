@@ -2,8 +2,11 @@ package com.geekbang.coupon.template.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
+import com.geekbang.coupon.template.api.beans.TemplateSearchParams;
 import com.geekbang.coupon.template.service.intf.CouponTemplateService;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.sql.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,9 +52,9 @@ public class CouponTemplateController {
 
     // 搜索模板
     @GetMapping("/search")
-    public List<CouponTemplateInfo> searchTemplate(@RequestBody CouponTemplateInfo request) {
+    public PagedCouponTemplateInfo search(@Valid @RequestBody TemplateSearchParams request) {
         log.info("search templates, payload={}", request);
-        return couponTemplateService.searchTemplate(request);
+        return couponTemplateService.search(request);
     }
 
     // 优惠券无效化
