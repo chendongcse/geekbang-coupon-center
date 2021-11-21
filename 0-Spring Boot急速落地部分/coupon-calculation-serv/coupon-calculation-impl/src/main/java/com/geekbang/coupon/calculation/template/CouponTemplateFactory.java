@@ -38,13 +38,8 @@ public class CouponTemplateFactory {
             return dummyTemplate;
         }
 
-        // 暂时不支持多张优惠券
-        if (order.getCouponInfos().size() > 1) {
-            log.error("不能使用多张优惠券");
-            throw new IllegalArgumentException("Cannot apply multiple coupons to one order");
-        }
-
         // 获取优惠券的类别
+        // 目前每个订单只支持单张优惠券
         CouponTemplateInfo template = order.getCouponInfos().get(0).getTemplate();
         CouponType category = CouponType.convert(template.getType());
 

@@ -15,7 +15,7 @@ public class DiscountTemplate extends AbstractRuleTemplate implements RuleTempla
     @Override
     protected Long calculateNewPrice(Long totalAmount, Long shopAmount, Long quota) {
         // 计算使用优惠券之后的价格
-        Long newPrice = convertToDecimal(shopAmount * (1D - quota.doubleValue()/100));
+        Long newPrice = convertToDecimal(shopAmount * (quota.doubleValue()/100));
         log.debug("original price={}, new price={}", totalAmount, newPrice);
         return newPrice;
     }

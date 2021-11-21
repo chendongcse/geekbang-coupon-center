@@ -1,0 +1,425 @@
+{
+	"info": {
+		"_postman_id": "f10508ea-9f65-4222-bb53-dd11012c6a18",
+		"name": "极客时间-Spring Boot阶段",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "template",
+			"item": [
+				{
+					"name": "创建满减券",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"全场满10减1元\",\n    \"desc\":\"满减券描述，每人限制最多10张\",\n    \"type\": \"1\",\n    \"total\":100,\n    \"available\": true,\n    \"rule\":{\n        \"limitation\":10,\n        \"discount\": {\n            \"quota\":10,\n            \"threshold\":1000\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/addTemplate",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"addTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "晚间双倍立减",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"晚间双倍立减券\",\n    \"desc\":\"满50随机立减最多5元，晚间减10元\",\n    \"type\": \"4\",\n    \"available\": true,\n    \"rule\":{\n        \"limitation\":10,\n        \"discount\": {\n            \"quota\":500,\n            \"threshold\":5000\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/addTemplate",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"addTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建随机立减",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"随机立减券\",\n    \"desc\":\"满50随机立减最多5元\",\n    \"type\": \"3\",\n    \"available\": true,\n    \"rule\":{\n        \"limitation\":10,\n        \"discount\": {\n            \"quota\":500,\n            \"threshold\":5000\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/addTemplate",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"addTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "创建打折券",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"打折券满10元打9折\",\n    \"desc\":\"每人限制最多10张\",\n    \"type\": \"2\",\n    \"available\": true,\n    \"rule\":{\n        \"limitation\":10,\n        \"discount\": {\n            \"quota\":90,\n            \"threshold\":1000\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/addTemplate",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"addTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "克隆券模板",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/cloneTemplate",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"cloneTemplate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "搜索卷",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pageSize\":1,\n    \"page\":0,\n    \"type\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/search",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "批量搜索卷",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"测试1\",\n\"desc\":\"测试desc\",\n\"type\": \"1\",\n\"total\":100,\n\"available\": true,\n\"rule\":{\n    \"limication\":10,\n    \"discount\": {\n        \"quota\":1,\n        \"base\":20\n    }\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/getBatch?ids=2",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"getBatch"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "calculator",
+			"item": [
+				{
+					"name": "计算订单",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"products\": [\n        {\n            \"price\" : 3000,\n            \"count\": 2,\n            \"shopId\": 3\n        },\n        {\n            \"price\" : 1000,\n            \"count\": 4,\n            \"shopId\":1\n        }\n    ],\n    \"couponId\": 10,\n    \"couponInfos\": [\n        {    \"id\": 10,\n            \"templateId\":2,\n            \"userId\":null,\n            \"shopId\":null,\n            \"template\": {\n                \"name\":\"单店满减\",\n                \"desc\":\"满40减5\",\n                \"type\": \"1\",\n                \"available\": true,\n                \"shopId\" : 1, \n                \"rule\":{\n                    \"limitation\":10,\n                    \"discount\": {\n                        \"quota\":500,\n                        \"threshold\":4000\n                    }\n                }\n            }\n        }\n    ],\n    \"userId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/calculator/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"calculator",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "领券",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "traffic-version",
+								"value": "123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"userId\":1,\n\"couponTemplateId\":7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/coupon-customer/requestCoupon",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"coupon-customer",
+								"requestCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "核销券",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"products\": [\n        {\n            \"price\" : 3000,\n            \"count\": 2,\n            \"shopId\": 3\n        },\n        {\n            \"price\" : 1000,\n            \"count\": 10,\n            \"shopId\":1\n        }\n    ],\n    \"couponId\": 17,\n    \"userId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/coupon-customer/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"coupon-customer",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查找券",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"userId\":1,\n\"couponTemplateId\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/coupon-customer/findCoupon",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"coupon-customer",
+								"findCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "优惠券试算",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"products\": [\n        {\n            \"price\" : 3000,\n            \"count\": 2,\n            \"shopId\": 3\n        },\n        {\n            \"price\" : 1000,\n            \"count\": 10,\n            \"shopId\":1\n        }\n    ],\n    \"couponIDs\": [1],\n    \"userId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/coupon-customer/simulateOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"coupon-customer",
+								"simulateOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除用户优惠券",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "traffic-version",
+								"value": "123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20001/coupon-customer/deleteCoupon?userId=1&couponId=38",
+							"host": [
+								"localhost"
+							],
+							"port": "20001",
+							"path": [
+								"coupon-customer",
+								"deleteCoupon"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "couponId",
+									"value": "38"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

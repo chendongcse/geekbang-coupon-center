@@ -6,6 +6,7 @@ import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
 import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.calculation.controller.service.intf.CouponCalculationService;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
+import com.geekbang.coupon.customer.api.beans.SearchCoupon;
 import com.geekbang.coupon.customer.api.enums.CouponStatus;
 import com.geekbang.coupon.customer.dao.CouponDao;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
@@ -74,14 +75,16 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     /**
      * 用户查询优惠券的接口
      */
-    @Deprecated
     @Override
-    public List<CouponInfo> findCoupon(Long userId, Integer status, Long shopId) {
+    public List<CouponInfo> findCoupon(SearchCoupon request) {
+        // 在真正的生产环境，这个接口需要做分页查询，并且查询条件要封装成一个类
         Coupon example = Coupon.builder()
-                .userId(userId)
-                .status(CouponStatus.convert(status))
-                .shopId(shopId)
+                .userId(request.getUserId())
+                .status(CouponStatus.convert(request.getCouponStatus()))
+                .shopId(request.getShopId())
                 .build();
+
+        // 这里你可以尝试实现分页查询
         List<Coupon> coupons = couponDao.findAll(Example.of(example));
         if (coupons.isEmpty()) {
             return Lists.newArrayList();
@@ -140,7 +143,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     @Transactional
     public ShoppingCart placeOrder(ShoppingCart order) {
         if (CollectionUtils.isEmpty(order.getProducts())) {
-            throw new IllegalArgumentException("empty cart");
+            log.error("invalid check out request, order={}", order);
+            throw new IllegalArgumentException("cart if empty");
         }
 
         Coupon coupon = null;
@@ -165,16 +169,18 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         // order清算
         ShoppingCart checkoutInfo = calculationService.calculateOrderPrice(order);
 
-        // 如果清算结果里没有优惠券，而用户传递了优惠券，报错提示该订单满足不了优惠条件
-        if (CollectionUtils.isEmpty(checkoutInfo.getCouponInfos()) && coupon != null) {
-            log.error("cannot apply coupponId={} to order", coupon.getId());
-            throw new IllegalArgumentException("coupon is not applicable to this order");
-        }
-
         if (coupon != null) {
+            // 如果优惠券没有被结算掉，而用户传递了优惠券，报错提示该订单满足不了优惠条件
+            if (CollectionUtils.isEmpty(checkoutInfo.getCouponInfos())) {
+                log.error("cannot apply coupon to order, couponId={}", coupon.getId());
+                throw new IllegalArgumentException("coupon is not applicable to this order");
+            }
+
+            log.info("update coupon status to used, couponId={}", coupon.getId());
             coupon.setStatus(CouponStatus.USED);
             couponDao.save(coupon);
         }
+
         return checkoutInfo;
     }
 

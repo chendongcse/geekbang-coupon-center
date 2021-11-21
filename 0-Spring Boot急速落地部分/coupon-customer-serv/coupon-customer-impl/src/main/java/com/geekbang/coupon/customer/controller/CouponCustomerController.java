@@ -4,6 +4,7 @@ import com.geekbang.coupon.calculation.api.beans.ShoppingCart;
 import com.geekbang.coupon.calculation.api.beans.SimulationOrder;
 import com.geekbang.coupon.calculation.api.beans.SimulationResponse;
 import com.geekbang.coupon.customer.api.beans.RequestCoupon;
+import com.geekbang.coupon.customer.api.beans.SearchCoupon;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
 import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
 import com.geekbang.coupon.template.api.beans.CouponInfo;
@@ -48,12 +49,9 @@ public class CouponCustomerController {
 
 
     // 实现的时候最好封装一个search object类
-    @Deprecated
-    @GetMapping("findCoupon")
-    public List<CouponInfo> findCoupon(@RequestParam("userId") Long userId,
-                                       @RequestParam(value = "status", required = false) Integer status,
-                                       @RequestParam(value = "shopId", required = false) Long shopId) {
-        return customerService.findCoupon(userId, status, shopId);
+    @PostMapping("findCoupon")
+    public List<CouponInfo> findCoupon(@Valid @RequestBody SearchCoupon request) {
+        return customerService.findCoupon(request);
     }
 
 }

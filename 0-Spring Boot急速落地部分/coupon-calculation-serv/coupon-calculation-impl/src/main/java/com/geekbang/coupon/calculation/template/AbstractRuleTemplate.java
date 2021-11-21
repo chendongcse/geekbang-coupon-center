@@ -79,9 +79,9 @@ public abstract class AbstractRuleTemplate implements RuleTemplate {
         return groups;
     }
 
-    // 设置最小支付金额
+    // 每个订单最少必须支付1分钱
     protected long minCost() {
-        return 1;
+        return 1L;
     }
 
     protected long convertToDecimal(Double value) {

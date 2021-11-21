@@ -51,7 +51,7 @@ public class CouponTemplateController {
     }
 
     // 搜索模板
-    @GetMapping("/search")
+    @PostMapping("/search")
     public PagedCouponTemplateInfo search(@Valid @RequestBody TemplateSearchParams request) {
         log.info("search templates, payload={}", request);
         return couponTemplateService.search(request);
