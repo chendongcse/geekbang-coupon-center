@@ -61,12 +61,6 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                 Coupon coupon = couponOptional.get();
                 CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
 
-                CouponTemplateInfo templateInfo = webClientBuilder.build().get()
-                        .uri("http://coupon-template-serv/template/getTemplate?id=" + couponInfo.getTemplateId())
-                        .retrieve()
-                        .bodyToMono(CouponTemplateInfo.class)
-                        .block();
-
                 couponInfo.setTemplate(loadTemplateInfo(coupon.getTemplateId()));
                 couponInfos.add(couponInfo);
             }
