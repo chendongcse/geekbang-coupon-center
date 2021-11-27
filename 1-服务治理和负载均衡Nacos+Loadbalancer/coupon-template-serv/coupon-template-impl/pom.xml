@@ -71,7 +71,7 @@
          在Spring Boot阶段，由于我们是通过customer服务来跑单体应用，所以不用加
          在Spring Cloud阶段，以java -jar 运行项目必须在各个impl项目的pom中加上这个注解
     -->
-<!--    <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -85,6 +85,6 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
 </project>
