@@ -68,15 +68,6 @@ spring:
         watch:
           enabled: true
         watch-delay: 30000
-    loadbalancer:
-      retry:
-        enabled: true
-        # 本机重试
-        max-retries-on-same-service-instance: 2
-        max-retries-on-next-service-instance: 2
-        retryable-status-codes: 500
-        retry-on-all-operations: true
-
 
 logging:
   level:

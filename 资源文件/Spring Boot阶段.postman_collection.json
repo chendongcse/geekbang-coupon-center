@@ -183,7 +183,7 @@
 					"response": []
 				},
 				{
-					"name": "批量搜索卷",
+					"name": "批量搜索券模板",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -212,6 +212,43 @@
 							"query": [
 								{
 									"key": "ids",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "获取单个券模板",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\":\"测试1\",\n\"desc\":\"测试desc\",\n\"type\": \"1\",\n\"total\":100,\n\"available\": true,\n\"rule\":{\n    \"limication\":10,\n    \"discount\": {\n        \"quota\":1,\n        \"base\":20\n    }\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:20000/template/getTemplate?id=2",
+							"host": [
+								"localhost"
+							],
+							"port": "20000",
+							"path": [
+								"template",
+								"getTemplate"
+							],
+							"query": [
+								{
+									"key": "id",
 									"value": "2"
 								}
 							]
@@ -306,14 +343,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:20001/coupon-customer/checkout",
+							"raw": "localhost:20001/coupon-customer/placeOrder",
 							"host": [
 								"localhost"
 							],
 							"port": "20001",
 							"path": [
 								"coupon-customer",
-								"checkout"
+								"placeOrder"
 							]
 						}
 					},
