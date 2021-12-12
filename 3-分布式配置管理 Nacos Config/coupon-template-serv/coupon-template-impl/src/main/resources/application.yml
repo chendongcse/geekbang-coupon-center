@@ -5,9 +5,9 @@ server:
     include-message: always
 
 spring:
-  application:
-    # 定义项目名称
-    name: coupon-template-serv
+  # 项目名称移到bootstrap.yml里了
+#  application:
+#    name: coupon-template-serv
   datasource:
     # mysql数据源
     username: root

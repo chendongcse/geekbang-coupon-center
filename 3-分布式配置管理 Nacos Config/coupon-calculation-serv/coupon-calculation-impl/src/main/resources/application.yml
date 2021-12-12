@@ -5,9 +5,10 @@ server:
 #    context-path: /coupon-template
 
 spring:
-  application:
-    # 定义项目名称
-    name: coupon-calculation-serv
+  # 项目名称移到bootstrap.yml里了
+#  application:
+#    # 定义项目名称
+#    name: coupon-calculation-serv
   cloud:
     nacos:
       discovery:
