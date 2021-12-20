@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS geekbang_coupon_db;
 
 -- 创建 coupon_template 数据表
-DROP IF EXISTS TABLE `geekbang_coupon_db`.`coupon_template`;
+DROP TABLE IF EXISTS `geekbang_coupon_db`.`coupon_template`;
 
 CREATE TABLE IF NOT EXISTS `geekbang_coupon_db`.`coupon_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
