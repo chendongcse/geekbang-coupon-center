@@ -11,8 +11,8 @@ spring:
   datasource:
     # mysql数据源
     username: root
-#    password:
-    url: jdbc:mysql://127.0.0.1:3306/geekbang_coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    password: root_password
+    url: jdbc:mysql://127.0.0.1:3306/springbucks?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 连接池
@@ -33,6 +33,7 @@ spring:
       hibernate.format_sql: true
       hibernate.show_sql: true
     open-in-view: false
+    database: mysql
 
 logging:
   level:
