@@ -52,15 +52,15 @@ public class CouponTemplateController {
     // 你也可以通过defaultFallback属性做一个全局限流、降级的处理逻辑
     // 如果你不想将降级方法写在当前类里，可以通过blockHandlerClass和fallbackClass指定"降级类"
     @SentinelResource(value = "getTemplateInBatch",
-//            fallback = "getTemplateInBatch_fallback",
+            fallback = "getTemplateInBatch_fallback",
             blockHandler = "getTemplateInBatch_block")
     public Map<Long, CouponTemplateInfo> getTemplateInBatch(
             @RequestParam("ids") Collection<Long> ids) {
         log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
         // 可以测试异常比例、异常数熔断
-        if (ids.size() == 2) {
-            throw new RuntimeException("异常");
-        }
+//        if (ids.size() == 2) {
+//            throw new RuntimeException("异常");
+//        }
         // 可以测试慢调用熔断
 //            try {
 //                Thread.sleep(500 * ids.size());
