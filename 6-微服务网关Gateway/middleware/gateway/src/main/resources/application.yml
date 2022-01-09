@@ -1,0 +1,62 @@
+server:
+  port: 30000
+  error:
+    include-message: always
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        heart-beat-interval: 5000
+        heart-beat-timeout: 15000
+        cluster-name: Cluster-A
+        namespace: dev
+        group: myGroup
+        register-enabled: true
+        watch:
+          enabled: true
+        watch-delay: 30000
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+#      routes:
+#        - id: id-0012
+#          uri: lb://coupon-customer-serv
+#          predicates:
+#            - Path=/whatever/**
+#          filters:
+#            - StripPrefix=1
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            # 授信地址列表
+            allowed-origins:
+              - "http://localhost:10000"
+              - "https://www.baidu.com"
+            # cookie, authorization认证信息
+            expose-headers: "*"
+            allowed-methods: "*"
+            allow-credentials: true
+            allowed-headers: "*"
+#        add-to-simple-url-handler-mapping: true
+  sleuth:
+    sampler:
+      probability: 1
+      rate: 1000
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+#logging:
+#  level: debug
